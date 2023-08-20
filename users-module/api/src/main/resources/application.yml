@@ -1,0 +1,58 @@
+server:
+  port: '8181'
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: "ANT_PATH_MATCHER"
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          webApp:
+            registration:
+              authorization-grant-types: password,external,refresh_token
+              client-id: vna-client
+              client-secret: '{noop}vna-client'
+              client-authentication_methods: client_secret_basic
+            token:
+              access-token-format: reference
+main:
+  flyway:
+    enabled: true
+    schemas: public
+  liquibase:
+    enabled: false
+  datasource:
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/pssvna
+    username: postgres
+logging:
+  level:
+    org:
+      atmosphere: warn
+    eclipselink:
+      logging:
+        sql: info
+    io:
+      jmix:
+        core:
+          AccessLogger: debug
+          datastore: info
+        nodeValue: info
+jmix:
+  core:
+    available-locales: en
+  rest:
+    anonymous-url-patterns: /rest/docs/*
+  cors:
+    allowed-origins: http://localhost:8181
+  security:
+    oauth2:
+        client-id: vna-client
+        client-secret: vna-secret
+        client-authorized-grant-types: password,external,refresh_token
+
+
+

@@ -1,0 +1,44 @@
+
+plugins {
+    id 'io.jmix' version '2.0.1'
+    id 'java'
+}
+group 'com.ngs.vna.users'
+version '0.0.1-SNAPSHOT'
+archivesBaseName = 'user-core'
+
+jmix {
+    bomVersion = '2.0.1'
+    entitiesEnhancing {
+        enabled = false
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://global.repo.jmix.io/repository/public'
+    }
+}
+
+dependencies {
+    implementation project(':core:core-jmix-security:jmix-security-oauth2.0')
+    implementation project(':core:core-jmix-data')
+    implementation project(':users-module:user-core')
+    implementation 'io.jmix.data:jmix-eclipselink-starter'
+    implementation 'io.jmix.security:jmix-security-data-starter'
+    implementation 'io.jmix.security:jmix-security-starter'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+}
+
+test {
+    useJUnitPlatform()
+}

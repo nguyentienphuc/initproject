@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ com.ngs.vna.jmix.core.security.oauth20.SecurityOAuth2AutoConfiguration

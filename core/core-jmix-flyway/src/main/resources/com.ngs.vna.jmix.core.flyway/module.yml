@@ -1,0 +1,7 @@
+main:
+  liquibase:
+    enabled: false
+spring:
+  flyway:
+    schemas: public
+    enabled: true

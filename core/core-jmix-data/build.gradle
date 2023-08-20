@@ -1,0 +1,37 @@
+plugins {
+    id 'io.jmix' version '2.0.1'
+    id 'java'
+}
+
+group 'com.ngs.vna.jmix.core.data'
+version '0.0.1-SNAPSHOT'
+
+archivesBaseName = 'core-jmix-data'
+
+
+jmix {
+    bomVersion = '2.0.1'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://global.repo.jmix.io/repository/public'
+    }
+}
+
+dependencies {
+    implementation 'io.jmix.core:jmix-core-starter'
+    implementation 'io.jmix.data:jmix-eclipselink-starter'
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
+
+}
+
+test {
+    useJUnitPlatform()
+}

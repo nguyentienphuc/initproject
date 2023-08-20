@@ -1,0 +1,33 @@
+plugins {
+    id 'io.jmix' version '2.0.1'
+    id 'java'
+}
+
+group 'com.ngs.vna.jmix.core.securiry.oauth20'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://global.repo.jmix.io/repository/public'
+    }
+}
+
+
+jmix {
+    bomVersion = '2.0.1'
+}
+
+dependencies {
+    implementation 'io.jmix.core:jmix-core'
+    implementation 'io.jmix.security:jmix-security'
+
+
+    implementation 'org.springframework:spring-tx'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
+    implementation ('javax.xml.bind:jaxb-api:2.3.0')
+    implementation ('javax.activation:activation:1.1')
+    implementation ('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+    runtimeOnly 'org.glassfish.jaxb:jaxb-runtime'
+}

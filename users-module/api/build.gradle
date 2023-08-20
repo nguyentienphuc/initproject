@@ -1,0 +1,53 @@
+plugins {
+    id 'io.jmix' version '2.0.1'
+    id 'java'
+}
+apply plugin: 'org.springframework.boot'
+group 'com.ngs.vna.users'
+version '0.0.1-SNAPSHOT'
+jmix {
+    bomVersion = '2.0.1'
+    entitiesEnhancing {
+        enabled = false
+    }
+}
+bootJar  {
+    mainClass  = 'com.ngs.vna.users.api.UserApiApplication'
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://global.repo.jmix.io/repository/public'
+    }
+}
+
+dependencies {
+    implementation project(':core:core-jmix-flyway')
+    implementation project(':users-module:user-security')
+    //implementation project(':core:core-jmix-security:jmix-security-oauth2.0-starter')
+
+    implementation 'io.jmix.authserver:jmix-authserver-starter'
+    implementation 'io.jmix.rest:jmix-rest-starter'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    implementation libs.postgresql
+
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

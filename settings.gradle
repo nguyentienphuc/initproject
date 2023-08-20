@@ -1,0 +1,57 @@
+rootProject.name = 'ngsd-vna'
+
+
+
+final lombokVersion ='1.18.28'
+final flywayVersion = '9.21.1'
+final postgresqlVersion = '42.6.0'
+
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('groovy', '3.0.5')
+            version('checkstyle', '8.37')
+            version('lombokVersion', lombokVersion)
+            version('flywayVersion', flywayVersion)
+            version('postgresqlVersion', postgresqlVersion)
+
+            plugin('flyway', 'flyway-gradle-plugin').versionRef('flywayVersion')
+
+
+            library('groovy-core', 'org.codehaus.groovy', 'groovy').versionRef('groovy')
+            library('groovy-json', 'org.codehaus.groovy', 'groovy-json').versionRef('groovy')
+            library('groovy-nio', 'org.codehaus.groovy', 'groovy-nio').versionRef('groovy')
+
+            library('lombok', 'org.projectlombok', 'lombok').versionRef('lombokVersion')
+            library('postgresql', 'org.postgresql', 'postgresql').versionRef('postgresqlVersion')
+            library('commons-lang3', 'org.apache.commons', 'commons-lang3').version {
+                strictly '[3.8, 4.0['
+                prefer '3.9'
+            }
+        }
+    }
+}
+
+
+include 'api-gateway'
+include 'config-server'
+
+include 'core:core-jmix-flyway'
+include 'core:core-jmix-data'
+include 'core:core-jmix-security'
+
+
+include 'users-module:core'
+project(':users-module:core').name = 'user-core'
+include 'users-module:api'
+project(':users-module:api').name = 'user-api'
+include 'users-module:admin-console'
+project(':users-module:admin-console').name = 'user-admin-console'
+include 'users-module:security'
+findProject(':users-module:security')?.name = 'user-security'
+include 'core:core-jmix-security:jmix-security-oauth2.0'
+findProject(':core:core-jmix-security:jmix-security-oauth2.0')?.name = 'jmix-security-oauth2.0'
+include 'core:core-jmix-security:jmix-security-oauth2.0-starter'
+findProject(':core:core-jmix-security:jmix-security-oauth2.0-starter')?.name = 'jmix-security-oauth2.0-starter'
+
